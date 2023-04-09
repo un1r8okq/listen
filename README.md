@@ -10,6 +10,7 @@ First you need to install the Composer dependencies. This is a bit messy.
 1. `mv composer.phar /usr/local/bin/composer`
 1. `composer install`
 1. `quit`
+1. `sudo chown -R $(id --user):$(id --group) vendor`
 1. `./vendor/bin/sail up -d`
 1. `cp .env.example .env`
 1. `./vendor/bin/sail php artisan key:generate`
