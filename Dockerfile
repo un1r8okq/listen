@@ -8,7 +8,6 @@ RUN \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     # Install Composer
     ./prod/install-composer.sh && \
-    mv composer.phar /usr/local/bin/composer && \
     # Install dependencies
     apt-get update && \
     apt-get install --yes --no-install-recommends unzip && \
