@@ -1,0 +1,32 @@
+version: '3'
+services:
+    listen:
+        build: ../
+        environment:
+            APP_KEY: REPLACE_WITH_APP_KEY
+            DB_PASSWORD: REPLACE_WITH_DB_PASSWORD
+        ports:
+            - '80:80/tcp'
+        depends_on:
+            - mysql
+    mysql:
+        image: 'mysql/mysql-server:8.0'
+        environment:
+            MYSQL_DATABASE: 'listen'
+            MYSQL_USER: laravel
+            MYSQL_PASSWORD: REPLACE_WITH_DB_PASSWORD
+            MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+        volumes:
+            - 'listen-mysql:/var/lib/mysql'
+        healthcheck:
+            test:
+                - CMD
+                - mysqladmin
+                - ping
+                - '--user=laravel'
+                - '--password=REPLACE_WITH_DB_PASSWORD'
+            retries: 3
+            timeout: 5s
+volumes:
+    listen-mysql:
+        driver: local
