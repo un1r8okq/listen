@@ -3,7 +3,7 @@ services:
     listen:
         build: ../
         environment:
-            APP_KEY: REPLACE_WITH_APP_KEY
+            APP_KEY: '${APP_KEY}'
         ports:
             - '80:80/tcp'
         volumes:

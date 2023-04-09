@@ -1,4 +1,4 @@
-.env
+*/**/.env
 prod/docker-compose.yml
 tests
 vendor
