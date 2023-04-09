@@ -7,7 +7,7 @@ services:
         ports:
             - '80:80/tcp'
         volumes:
-            - 'sqlite:/var/www/html/database/database.sqlite'
+            - 'sqlite:/var/www/html/database/sqlite'
 volumes:
     sqlite:
         driver: local
