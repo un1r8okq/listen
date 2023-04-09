@@ -1,2 +1,2 @@
 #!/bin/bash
-docker compose --detach -f ./prod/docker-compose.yml up --build
+docker compose --file ./prod/docker-compose.yml up --build --detach
