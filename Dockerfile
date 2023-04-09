@@ -8,10 +8,14 @@ RUN \
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     # Install Composer
     ./prod/install-composer.sh && \
+    # Install NodeJS source
+    curl -fsSL https://deb.nodesource.com/setup_19.x | bash - && \
     # Install dependencies
-    apt-get update && \
-    apt-get install --yes --no-install-recommends unzip && \
+    apt-get install --yes --no-install-recommends unzip nodejs && \
     rm -rf /var/lib/apt/lists/* && \
+    # Fix NPM caching bug
+    # https://github.com/npm/cli/issues/5114#issuecomment-1196456412
+    npm config set cache /tmp --global && \
     # Install Apache rewrite module
     a2enmod rewrite && \
     # Install Apache configuration
@@ -23,8 +27,9 @@ USER www-data:www-data
 
 COPY --chown=www-data:www-data . /var/www/html/
 
-RUN ls -la && \
-    composer install --optimize-autoloader --no-dev && \
+RUN composer install --optimize-autoloader --no-dev && \
+    npm install && \
+    npm run build && \
     php artisan route:cache && \
     php artisan view:cache
 
