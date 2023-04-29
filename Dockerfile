@@ -21,7 +21,10 @@ RUN \
     # Install Apache configuration
     cp ./prod/listen.conf /etc/apache2/sites-available/listen.conf && \
     a2dissite 000-default.conf && \
-    a2ensite listen.conf
+    a2ensite listen.conf && \
+    # Install PHP OpCache extension
+    docker-php-ext-configure opcache && \
+    docker-php-ext-install opcache
 
 USER www-data:www-data
 
@@ -31,6 +34,7 @@ RUN composer install --optimize-autoloader --no-dev && \
     npm install && \
     npm run build && \
     php artisan route:cache && \
-    php artisan view:cache
+    php artisan view:cache && \
+    php artisan config:cache
 
 ENTRYPOINT [ "./prod/entrypoint.sh" ]
