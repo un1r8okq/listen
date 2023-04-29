@@ -14,7 +14,9 @@
             crossorigin="anonymous"
         >
     </head>
-    <body class="container">
+    <body class="container pt-5">
+        <h1>Listen</h1>
+        <p>An app that records information about everything that visits it. Why? Idk man why do anything 🤷🏻‍♂️</p>
         <table class="table">
             <thead>
                 <tr>
