@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('index', ['requests' => AppRequest::with('userAgent')->get()]);
+    return view('index', [
+        'requests' => AppRequest::query()
+            ->with('userAgent')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10),
+    ]);
 });

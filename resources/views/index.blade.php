@@ -14,7 +14,7 @@
             crossorigin="anonymous"
         >
     </head>
-    <body class="container h-100 d-flex flex-column justify-content-center align-items-center">
+    <body class="container">
         <table class="table">
             <thead>
                 <tr>
@@ -34,5 +34,6 @@
                     </tr>
                 @endforeach
         </table>
+        {{ $requests->links() }}
     </body>
 </html>
