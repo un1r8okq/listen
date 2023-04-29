@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('index', ['requests' => AppRequest::all()]);
+    return view('index', ['requests' => AppRequest::with('userAgent')->get()]);
 });
