@@ -15,7 +15,24 @@
         >
     </head>
     <body class="container h-100 d-flex flex-column justify-content-center align-items-center">
-        <h1>{{ config('app.name') }}</h1>
-        <p class="text-secondary">Coming soon.</p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">IP Address</th>
+                    <th scope="col">User Agent</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($requests as $request)
+                    <tr>
+                        <th scope="row">{{ $request->id }}</th>
+                        <td>{{ $request->created_at }}</td>
+                        <td>{{ $request->ip_address }}</td>
+                        <td>{{ $request->userAgent->user_agent }}</td>
+                    </tr>
+                @endforeach
+        </table>
     </body>
 </html>

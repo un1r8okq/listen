@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\AppRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,5 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('index');
+    return view('index', ['requests' => AppRequest::all()]);
 });
