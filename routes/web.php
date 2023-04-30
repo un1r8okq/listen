@@ -2,6 +2,7 @@
 
 use App\Models\AppRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,23 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(['throttle:web'])->group(function () {
     Route::get('/', function () {
-        return view('index', [
+        return redirect('/all');
+    });
+
+    Route::get('/all', function () {
+        return view('all', [
             'requests' => AppRequest::query()
                 ->with('userAgent')
                 ->orderBy('created_at', 'desc')
+                ->paginate(10),
+        ]);
+    });
+
+    Route::get('/by-ip', function () {
+        return view('by-ip', [
+            'ips' => DB::table('app_requests')
+                ->selectRaw('ip_address, count(*) as num_requests')
+                ->groupBy('ip_address')
                 ->paginate(10),
         ]);
     });

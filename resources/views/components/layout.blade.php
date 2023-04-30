@@ -13,5 +13,45 @@
             crossorigin="anonymous"
         >
     </head>
-    {{ $slot }}
+    <body>
+        <nav class="navbar navbar-expand-lg bg-light mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Listen</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a
+                                @class([
+                                    'nav-link',
+                                    'active' => Request::path() == 'all',
+                                ])
+                                {{!! Request::path() == 'all' && 'aria-current="page"' }}
+                                href="/all"
+                            >
+                                All requests
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a
+                                @class([
+                                    'nav-link',
+                                    'active' => Request::path() == 'by-ip',
+                                ])
+                                {{!! Request::path() == 'by-ip' && 'aria-current="page"' }}
+                                href="/by-ip"
+                            >
+                                Requests by IP
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            {{ $slot }}
+        </div>
+    </body>
 </html>
