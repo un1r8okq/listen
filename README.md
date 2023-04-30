@@ -15,3 +15,15 @@ First you need to install the Composer dependencies. This is a bit messy.
 1. `cp .env.example .env`
 1. `./vendor/bin/sail php artisan key:generate`
 1. App should be running at http://localhost
+
+## Prod setup
+1. Clone this repo
+1. Run `./run-prod.sh`
+1. `cd prod`
+1. `cp .env.example .env`
+1. Set APP_KEY in `prod/.env`
+1. Run `./run-prod.sh`
+
+To get the latest changes, run:
+1. `git pull`
+1. `./run-prod.sh`
