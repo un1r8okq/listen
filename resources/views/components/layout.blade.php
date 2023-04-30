@@ -46,6 +46,18 @@
                                 Requests by IP
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a
+                                @class([
+                                    'nav-link',
+                                    'active' => Request::path() == 'by-url',
+                                ])
+                                {{!! Request::path() == 'by-url' && 'aria-current="page"' }}
+                                href="/by-url"
+                            >
+                                Requests by URL
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

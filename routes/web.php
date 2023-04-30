@@ -33,6 +33,17 @@ Route::middleware(['throttle:web'])->group(function () {
             'ips' => DB::table('app_requests')
                 ->selectRaw('ip_address, count(*) as num_requests')
                 ->groupBy('ip_address')
+                ->orderBy('num_requests', 'desc')
+                ->paginate(10),
+        ]);
+    });
+
+    Route::get('/by-url', function () {
+        return view('by-url', [
+            'urls' => DB::table('app_requests')
+                ->selectRaw('url, count(*) as num_requests')
+                ->groupBy('url')
+                ->orderBy('num_requests', 'desc')
                 ->paginate(10),
         ]);
     });
