@@ -37,7 +37,7 @@ USER www-data:www-data
 COPY --chown=www-data:www-data . /var/www/html/
 
 RUN composer install --optimize-autoloader --no-dev && \
-    npm install && \
+    npm ci && \
     npm run build && \
     php artisan route:cache && \
     php artisan view:cache
