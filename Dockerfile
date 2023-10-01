@@ -7,6 +7,8 @@ COPY prod ./prod
 RUN \
     # Use the default production PHP configuration
     mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
+    # Don't advertise what version of PHP we're running
+    echo "expose_php = off" >>  "$PHP_INI_DIR/php.ini" && \
     # Install Composer
     ./prod/install-composer.sh && \
     # Install dependencies
